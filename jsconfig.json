@@ -1,0 +1,12 @@
+/*
+this file tells vs code to treat this as a js projrct, because by default, vs code will treat it as a tyscript project
+*/
+
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "commonjs",
+    "allowSyntheticDefaultImports": true
+  },
+  "exclude": ["node_modules"]
+}
