@@ -3,6 +3,7 @@ import {View, Text, StyleSheet} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 import AsyncStorage from '@react-native-community/async-storage';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
 
 import OnboardScreen from '../screen/OnboardScreen';
 import LoginScreen from '../screen/LoginScreen';
@@ -23,6 +24,12 @@ export default function AuthStack(props) {
       } else {
         setIsFirstLunch(false);
       }
+    });
+
+    //谷歌需要一上来就初始化
+    GoogleSignin.configure({
+      webClientId:
+        '40498943449-mnshvkit08chan8ll53jlgldlgkceujm.apps.googleusercontent.com',
     });
   }, []);
 
