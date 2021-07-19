@@ -24,11 +24,11 @@ export default function LoginScreen({navigation}) {
 
   return (
     <View style={styles.container}>
-      <Image
+      {/* <Image
         style={styles.logo}
         source={require('../assets/rn-social-logo.png')}
-      />
-      <Text style={styles.text}>RN Social App</Text>
+      /> */}
+      <Text style={styles.text}>Fly Docs</Text>
       <FormInput
         labelValue={email}
         onChangeText={value => setEmail(value)}
