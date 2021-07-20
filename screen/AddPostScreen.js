@@ -12,41 +12,26 @@ import {
 } from 'react-native';
 import ActionButton from 'react-native-simple-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
-import ImagePicker from 'react-native-image-crop-picker';
+import MultipleImagePicker from '@baronha/react-native-multiple-image-picker';
 
 import FormButton from '../components/FormButton';
 import {AuthContext} from '../navigation/AuthProvider';
 
-export default function AddPostScreen(props) {
+export default function AddPostScreen({navigation}) {
   const {logout, user} = useContext(AuthContext);
   const [image, setImage] = useState(null);
-  const takePhotoFromCamera = () => {
-    ImagePicker.openCamera({
-      width: 300,
-      height: 400,
-      multiple: true,
-    }).then(image => {
-      console.log(image.path);
-      setImage(image.path);
-    });
+
+  const handleOpenLibrary = async () => {
+    await MultipleImagePicker.openPicker({
+      mediaType: 'image',
+      isPreview: false,
+    })
+      .then(response => console.log(response))
+      .catch(err => console.log(err));
   };
 
-  const choosePhotoFromLibrary = () => {
-    ImagePicker.openPicker({
-      width: 300,
-      height: 400,
-      cropping: true,
-      multiple: true,
-    }).then(image => {
-      console.log(image.path);
-      setImage(image.path);
-    });
-  };
   return (
     <View style={styles.container}>
-      {image ? (
-        <Image source={{uri: image}} style={{width: 200, height: 200}} />
-      ) : null}
       <View style={styles.inputWrapper}>
         <TextInput
           placeholder="add something here"
@@ -58,13 +43,13 @@ export default function AddPostScreen(props) {
         <ActionButton.Item
           buttonColor="#9b59b6"
           title="Take Photo"
-          onPress={() => takePhotoFromCamera()}>
+          onPress={() => navigation.navigate('camera')}>
           <Icon name="camera-outline" style={styles.actionButtonIcon} />
         </ActionButton.Item>
         <ActionButton.Item
           buttonColor="#3498db"
           title="Choose Photo"
-          onPress={() => choosePhotoFromLibrary()}>
+          onPress={() => handleOpenLibrary()}>
           <Icon name="md-images-outline" style={styles.actionButtonIcon} />
         </ActionButton.Item>
       </ActionButton>
@@ -84,32 +69,3 @@ const styles = StyleSheet.create({
     color: 'white',
   },
 });
-
-//  special for ActionButtons
-// ActionButton.prototype.animateButton = function (animate = true) {
-//   if (this.state.active) return this.reset();
-
-//   if (animate) {
-//     Animated.spring(this.anim, {toValue: 1, useNativeDriver: false}).start();
-//   } else {
-//     this.anim.setValue(1);
-//   }
-
-//   this.setState({active: true, resetToken: this.state.resetToken});
-// };
-
-// ActionButton.prototype.reset = function (animate = true) {
-//   if (this.props.onReset) this.props.onReset();
-
-//   if (animate) {
-//     Animated.spring(this.anim, {toValue: 0, useNativeDriver: false}).start();
-//   } else {
-//     this.anim.setValue(0);
-//   }
-
-//   setTimeout(() => {
-//     if (this.mounted) {
-//       this.setState({active: false, resetToken: this.state.resetToken});
-//     }
-//   }, 250);
-// };

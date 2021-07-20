@@ -12,6 +12,7 @@ import ProfileScreen from '../screen/ProfileScreen.js';
 import AddPostScreen from '../screen/AddPostScreen.js';
 import MessagesScreen from '../screen/MessagesScreen.js';
 import EditProfileScreen from '../screen/EditProfileScreen.js';
+import Camera from '../screen/Camera';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -90,6 +91,7 @@ const MyDocStack = ({navigation}) => (
         ),
       }}
     />
+    <Stack.Screen name="camera" component={Camera} />
   </Stack.Navigator>
 );
 
