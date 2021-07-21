@@ -1,8 +1,16 @@
 import React from 'react';
 import Providers from './navigation';
+import {UserProvider} from './store/ImageContext';
+import {ProductsProvider} from './store/ProductContext';
 
 const App = () => {
-  return <Providers />;
+  return (
+    <UserProvider>
+      <ProductsProvider>
+        <Providers />
+      </ProductsProvider>
+    </UserProvider>
+  );
 };
 
 export default App;

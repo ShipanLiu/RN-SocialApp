@@ -43,7 +43,7 @@ export default function AddPostScreen({navigation}) {
         <ActionButton.Item
           buttonColor="#9b59b6"
           title="Take Photo"
-          onPress={() => navigation.navigate('camera')}>
+          onPress={() => navigation.navigate('docScanner')}>
           <Icon name="camera-outline" style={styles.actionButtonIcon} />
         </ActionButton.Item>
         <ActionButton.Item

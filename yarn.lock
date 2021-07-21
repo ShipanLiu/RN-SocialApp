@@ -1564,6 +1564,11 @@
     "@typescript-eslint/types" "4.28.3"
     eslint-visitor-keys "^2.0.0"
 
+"@woonivers/react-native-document-scanner@^2.1.1":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@woonivers/react-native-document-scanner/-/react-native-document-scanner-2.1.1.tgz#1e821ad2c8a480c1b1d4f39c30eaad4c4ae0349a"
+  integrity sha512-DJVRhEOtY8I8RzcG64mmFZqaoRqnpAOjeiI2gU5XnjyIuSkURp5YnfiH21i/fOx/xLPhIuf1MRvEWK1l74F9CQ==
+
 abab@^2.0.3, abab@^2.0.5:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/abab/-/abab-2.0.5.tgz#c0b678fb32d60fc1219c784d6a826fe385aeb79a"

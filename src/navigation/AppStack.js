@@ -13,6 +13,7 @@ import AddPostScreen from '../screen/AddPostScreen.js';
 import MessagesScreen from '../screen/MessagesScreen.js';
 import EditProfileScreen from '../screen/EditProfileScreen.js';
 import Camera from '../screen/Camera';
+import DocScanner from '../screen/DocScanner';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -92,6 +93,7 @@ const MyDocStack = ({navigation}) => (
       }}
     />
     <Stack.Screen name="camera" component={Camera} />
+    <Stack.Screen name="docScanner" component={DocScanner} />
   </Stack.Navigator>
 );
 
