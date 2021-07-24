@@ -22,7 +22,7 @@ const FeedStack = ({navigation}) => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="RN Social"
+        name="Fly Docs"
         component={HomeScreen}
         options={{
           headerTitleAlign: 'center',
