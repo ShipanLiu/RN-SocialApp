@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {
   View,
   Text,
@@ -8,6 +8,7 @@ import {
   Dimensions,
   TouchableOpacity,
   FlatList,
+  Animated,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Slider from '@react-native-community/slider';
@@ -17,20 +18,87 @@ import songs from '../modal/data';
 const {width: windowWidth, height: windowHeight} = Dimensions.get('window');
 
 export default function MusicPlayer(props) {
+  const [songIndex, setSongIndex] = useState(0);
+  const songSlider = useRef();
+
+  // 指向 new Animated
+  const scrollX = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    scrollX.addListener(({value}) => {
+      //  从而根据几倍的关系， 知道我翻到了哪个页面了。
+      const index = Math.round(value / windowWidth);
+      console.log(index);
+      setSongIndex(index);
+    });
+
+    //把 Listener remove 掉
+    return () => {
+      scrollX.removeAllListeners();
+    };
+  }, []);
+
+  const skipForward = () => {
+    songSlider.current.scrollToOffset({
+      offset: (songIndex + 1) * windowWidth,
+    });
+  };
+
+  const skipBackward = () => {
+    if (songIndex >= 0) {
+      songSlider.current.scrollToOffset({
+        offset: (songIndex - 1) * windowWidth,
+      });
+    }
+  };
+
+  const renderSongs = ({item}) => {
+    return (
+      <Animated.View
+        style={{
+          width: windowWidth,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <View style={styles.artworkWrapper}>
+          <Image style={styles.artworkImg} source={item.image} />
+        </View>
+      </Animated.View>
+    );
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.mainContainer}>
         {/* ArtWork */}
-        <View style={styles.artworkWrapper}>
-          <Image
-            style={styles.artworkImg}
-            source={require('../assets/1.jpg')}
+        <View style={{width: windowWidth}}>
+          <Animated.FlatList
+            // 定义一个ref 来到指定的页面。
+            ref={songSlider}
+            data={songs}
+            keyExtractor={item => item.id}
+            renderItem={renderSongs}
+            horizontal
+            pagingEnabled
+            showsHorizontalScrollIndicator={false}
+            scrollEventThrottle={16}
+            onScroll={Animated.event(
+              [
+                {
+                  nativeEvent: {
+                    contentOffset: {x: scrollX},
+                  },
+                },
+              ],
+              {useNativeDriver: true},
+            )}
           />
         </View>
+
         {/* name of songs */}
         <View>
-          <Text style={styles.songTitle}>Song Title</Text>
-          <Text style={styles.songArtist}>Song Artist Name</Text>
+          <Text style={styles.songTitle}>{songs[songIndex].title}</Text>
+          <Text style={styles.songArtist}>{songs[songIndex].artist}</Text>
         </View>
         {/* song time line */}
         <View>
@@ -51,7 +119,7 @@ export default function MusicPlayer(props) {
         </View>
         {/* music controls */}
         <View style={styles.musicControls}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={skipBackward}>
             <Icon
               name="play-skip-back-outline"
               size={35}
@@ -62,7 +130,7 @@ export default function MusicPlayer(props) {
           <TouchableOpacity>
             <Icon name="ios-pause-circle" size={75} color="#FFD369" />
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={skipForward}>
             <Icon
               name="play-skip-forward-outline"
               size={35}
