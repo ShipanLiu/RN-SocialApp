@@ -14,6 +14,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 import ListNotesScreen from './screen/ListNotesScreen';
 import CreateNoteScreen from './screen/CreateNoteScreen';
+import ShowContentScreen from './screen/ShowContentScreen';
 import {NotesProvider} from './context/NotesContexts';
 
 const Stack = createStackNavigator();
@@ -34,6 +35,11 @@ function App(props) {
           name="create"
           component={CreateNoteScreen}
           options={() => ({title: 'create ome note'})}
+        />
+        <Stack.Screen
+          name="content"
+          component={ShowContentScreen}
+          options={() => ({title: 'the exact content'})}
         />
       </Stack.Navigator>
     </NavigationContainer>

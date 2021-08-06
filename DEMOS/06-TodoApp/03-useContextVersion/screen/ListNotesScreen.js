@@ -34,7 +34,11 @@ export default function ListNotesScreen({navigation}) {
         keyExtractor={item => item.title}
         renderItem={({item}) => (
           <View style={styles.singleItem}>
-            <Text style={styles.itemText}>{item.title}</Text>
+            <TouchableOpacity
+              style={styles.contentArea}
+              onPress={() => navigation.navigate('content', {item: item})}>
+              <Text style={styles.itemText}>{item.title}</Text>
+            </TouchableOpacity>
             <TouchableOpacity
               style={styles.itemIcon}
               onPress={() =>
@@ -79,5 +83,10 @@ const styles = StyleSheet.create({
   itemIcon: {
     borderWidth: 1,
     borderRadius: 15,
+  },
+  contentArea: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
   },
 });
