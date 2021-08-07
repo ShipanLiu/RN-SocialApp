@@ -3,13 +3,7 @@
 import * as actions from '../actions/actions';
 import uuid from 'react-native-uuid';
 
-export const initialState = [
-  {
-    id: 1,
-    title: 'Jiba',
-    content: 'Dan',
-  },
-];
+export const initialState = [];
 
 export const reducer = (state, action) => {
   switch (action.type) {
@@ -32,6 +26,8 @@ export const reducer = (state, action) => {
           return item;
         }
       });
+    case actions.REFRESH:
+      return action.payload;
     default:
       return state;
   }

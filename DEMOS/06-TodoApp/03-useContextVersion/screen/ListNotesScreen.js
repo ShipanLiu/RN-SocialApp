@@ -1,4 +1,15 @@
-import React, {useContext} from 'react';
+/*
+  reducer 里面的state 存储问题：
+
+  1.用 useState在 Component里面创建 State 的镜像 showState
+  2. asyncStorage 存储。
+  3. 反向刷新 state。 在 getNotesFromLocal 函数里里面。
+
+
+
+*/
+
+import React, {useContext, useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -15,11 +26,51 @@ import {
 import {NotesContext} from '../context/NotesContexts';
 import * as actions from '../actions/actions';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const {width: windowWidth, height: windowHeight} = Dimensions.get('window');
 
 export default function ListNotesScreen({navigation}) {
   const {state, dispatch} = useContext(NotesContext);
+  const [showState, setShowState] = useState(state);
+
+  useEffect(() => {
+    getNotesFromLocal();
+  }, []);
+
+  useEffect(() => {
+    setShowState(state);
+  }, [state]);
+
+  useEffect(() => {
+    saveNotesToLocal();
+  }, [showState]);
+
+  const saveNotesToLocal = async () => {
+    try {
+      const stringifyTodos = JSON.stringify(showState);
+      await AsyncStorage.setItem('todos', stringifyTodos);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getNotesFromLocal = async () => {
+    try {
+      const todos = await AsyncStorage.getItem('todos');
+      setShowState(JSON.parse(todos));
+      // 上来就刷新， state 肯定是空的。 只有showState不是空的。
+      // 所以要反向同步一下。
+      refreshState(JSON.parse(todos));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const refreshState = data => {
+    dispatch({type: actions.REFRESH, payload: data});
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.buttonContainer}>
@@ -30,8 +81,8 @@ export default function ListNotesScreen({navigation}) {
         />
       </View>
       <FlatList
-        data={state}
-        keyExtractor={item => item.title}
+        data={showState}
+        keyExtractor={item => item.id}
         renderItem={({item}) => (
           <View style={styles.singleItem}>
             <TouchableOpacity
