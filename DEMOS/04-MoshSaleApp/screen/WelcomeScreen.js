@@ -2,8 +2,8 @@
 
 import React from 'react';
 import {View, Text, Image, ImageBackground, StyleSheet} from 'react-native';
-import AppButton from '../component/AppButton';
-import colors from '../config/colors';
+import AppButton from '../../04-styling/components/AppButton';
+import colors from '../../04-styling/config/colors';
 
 export default function WelcomeScreen({navigation}) {
   return (

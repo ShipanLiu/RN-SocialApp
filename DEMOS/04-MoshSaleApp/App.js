@@ -17,17 +17,18 @@ import ListingEditScreen from './screen/ListingEditScreen';
 import Test from './screen/Test';
 import ImgPickerScreen from './screen/ImgPickerScreen';
 import ImageInput from './component/ImageInput';
-import AuthNavigator from './navigator/AuthNavigator';
+import AppNavigator from './navigator/AppNavigator';
+import navigationTheme from './navigator/navigationTheme';
 
-const listData = [
-  {label: 'Furniture', value: 1},
-  {label: 'Clothing', value: 2},
-  {label: 'Cameras', value: 3},
-  {label: 'jibas', value: 4},
-];
+// const listData = [
+//   {label: 'Furniture', value: 1},
+//   {label: 'Clothing', value: 2},
+//   {label: 'Cameras', value: 3},
+//   {label: 'jibas', value: 4},
+// ];
 export default function App() {
   return (
-    <View>
+    <>
       <StatusBar backgroundColor="transparent" />
       {/* <WelcomPage /> */}
       {/* <CardScreen /> */}
@@ -45,13 +46,13 @@ export default function App() {
         numberOfColumns={3}
       /> */}
       {/* <LoginScreen /> */}
-      <ListingEditScreen />
+      {/* <ListingEditScreen /> */}
       {/* <ImgPickerScreen /> */}
       {/* <Test /> */}
       {/* <ImageInput /> */}
-      {/* <NavigationContainer>
-        <AuthNavigator />
-      </NavigationContainer> */}
-    </View>
+      <NavigationContainer theme={navigationTheme}>
+        <AppNavigator />
+      </NavigationContainer>
+    </>
   );
 }

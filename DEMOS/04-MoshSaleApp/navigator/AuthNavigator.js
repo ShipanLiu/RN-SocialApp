@@ -10,9 +10,13 @@ const Stack = createStackNavigator();
 
 export default function AuthNavigator() {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="Welcome" component={WelcomeScreen} />
-      <Stack.Screen name="Login" component={WelcomeScreen} />
+    <Stack.Navigator initialRouteName="Welcome">
+      <Stack.Screen
+        name="Welcome"
+        component={WelcomeScreen}
+        options={{title: 'jiab'}}
+      />
+      <Stack.Screen name="Login" component={LoginScreen} />
     </Stack.Navigator>
   );
 }

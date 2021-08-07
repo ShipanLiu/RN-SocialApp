@@ -36,7 +36,7 @@ export default function ListNotesScreen({navigation}) {
           <View style={styles.singleItem}>
             <TouchableOpacity
               style={styles.contentArea}
-              onPress={() => navigation.navigate('content', {item: item})}>
+              onPress={() => navigation.navigate('content', {id: item.id})}>
               <Text style={styles.itemText}>{item.title}</Text>
             </TouchableOpacity>
             <TouchableOpacity

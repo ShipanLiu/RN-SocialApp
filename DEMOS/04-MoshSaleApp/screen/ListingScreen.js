@@ -3,7 +3,17 @@
 */
 
 import React from 'react';
-import {View, Text, SafeAreaView, StyleSheet, FlatList} from 'react-native';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  StyleSheet,
+  FlatList,
+  TouchableWithoutFeedback,
+  ActivityIndicator,
+} from 'react-native';
+import LottieView from 'lottie-react-native';
+
 import Card from '../component/Card';
 import colors from '../config/colors';
 
@@ -25,6 +35,13 @@ const listings = [
 export default function ListingScreen() {
   return (
     <SafeAreaView style={styles.screen}>
+      <ActivityIndicator animating={true} size="large" color="#00ff00" />
+      <LottieView
+        style={{zIndex: 10}}
+        autoPlay
+        loop
+        source={require('../assets/lottieAnimation.json')}
+      />
       <FlatList
         data={listings}
         keyExtractor={item => item.id.toString()}

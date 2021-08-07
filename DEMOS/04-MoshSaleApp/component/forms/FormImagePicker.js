@@ -31,6 +31,8 @@ export default function FormImagePicker({name}) {
     setFieldValue(name, filteredImageUris);
   };
 
+  console.log(imageUris);
+
   return (
     <>
       <ImageInputList

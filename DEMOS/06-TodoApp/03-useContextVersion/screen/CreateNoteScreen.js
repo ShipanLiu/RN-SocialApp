@@ -64,7 +64,7 @@ export default function CreateNoteScreen({navigation}) {
             type: actions.ADD,
             payload: {title: title, content: content},
           });
-          navigation.navigate('notes');
+          navigation.goBack();
         }}>
         <Text style={styles.buttonText}>Done</Text>
       </TouchableOpacity>
