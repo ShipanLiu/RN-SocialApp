@@ -9,7 +9,7 @@ import auth from '@react-native-firebase/auth';
 
 import {AuthContext} from './AuthProvider';
 import AuthStack from './AuthStack';
-import AppStack from './AppStack';
+import DrawerStack from './DrawerStack';
 
 export default function Routes() {
   // 把user 和 setUser 拿过来
@@ -39,7 +39,8 @@ export default function Routes() {
   // 一旦有了user 之后，就直接跳到 AppStack 里面
   return (
     <NavigationContainer>
-      {user ? <AppStack /> : <AuthStack />}
+      {/* {user ? <AppStack /> : <AuthStack />} */}
+      <DrawerStack />
     </NavigationContainer>
   );
 }

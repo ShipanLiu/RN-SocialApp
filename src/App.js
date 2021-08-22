@@ -1,5 +1,6 @@
 import React from 'react';
-import Providers from './navigation';
+import {StatusBar} from 'react-native';
+import Providers from './navigation/index';
 import {UserProvider} from './store/ImageContext';
 import {ProductsProvider} from './store/ProductContext';
 
@@ -7,6 +8,7 @@ const App = () => {
   return (
     <UserProvider>
       <ProductsProvider>
+        <StatusBar barStyle="dark-content" backgroundColor="transparent" />
         <Providers />
       </ProductsProvider>
     </UserProvider>
