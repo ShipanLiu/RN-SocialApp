@@ -20,7 +20,7 @@ const DrawerStack = () => {
         initialRouteName: 'feedStack',
       }}>
       <Drawer.Screen
-        name="feedStack"
+        name="home-drawer"
         component={TabStack}
         options={{
           title: 'Home',

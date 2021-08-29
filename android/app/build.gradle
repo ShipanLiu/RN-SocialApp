@@ -1,5 +1,5 @@
 apply plugin: "com.android.application"
-
+apply from: '../../node_modules/react-native-unimodules/gradle.groovy'
 
 import com.android.build.OutputFile
 
@@ -139,6 +139,7 @@ android {
         versionName "1.0"
         vectorDrawables.useSupportLibrary = true
         missingDimensionStrategy 'react-native-camera', 'general' // <--- insert this line
+        multiDexEnabled true
     }
     splits {
         abi {
@@ -192,6 +193,7 @@ dependencies {
     implementation "com.facebook.react:react-native:+"  // From node_modules
     implementation project(':react-native-fs')
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
+    addUnimodulesDependencies()
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
       exclude group:'com.facebook.fbjni'
